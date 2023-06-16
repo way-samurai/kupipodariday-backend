@@ -4,6 +4,8 @@ import configuration from './config/configuration';
 import { configSchema } from './config/joi.shema';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -25,8 +27,12 @@ import * as winston from 'winston';
         new winston.transports.File({ filename: 'error.log', level: 'error' }),
       ],
     }),
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 20,
+    }),
   ],
   controllers: [],
-  providers: [],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}
