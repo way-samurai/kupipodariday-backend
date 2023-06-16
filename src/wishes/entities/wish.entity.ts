@@ -1,10 +1,11 @@
-import { Entity, Column, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, ManyToOne } from 'typeorm';
 import { IsString, Length, IsUrl, IsNumber, IsInt } from 'class-validator';
 import { MainEntity } from 'src/custom-entities/main.entity';
-import { Offers } from 'src/offers/entities/offers.entity';
+import { Offer } from 'src/offers/entities/offer.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Entity()
-export class Wishes extends MainEntity {
+export class Wish extends MainEntity {
   @Column({
     type: 'varchar',
     length: 250,
@@ -29,9 +30,9 @@ export class Wishes extends MainEntity {
   @IsNumber()
   raised: number;
 
-  @Column()
+  @ManyToOne(() => User, (user) => user.wishes)
   @IsUrl()
-  owner: string;
+  owner: User;
 
   @Column({
     type: 'varchar',
@@ -41,8 +42,8 @@ export class Wishes extends MainEntity {
   @Length(1, 1024)
   description: string;
 
-  @OneToMany(() => Offers, (offer) => offer.item)
-  offers: Offers[];
+  @OneToMany(() => Offer, (offer) => offer.item)
+  offers: Offer[];
 
   @Column({ default: 0 })
   @IsInt()

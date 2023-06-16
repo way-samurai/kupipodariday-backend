@@ -1,9 +1,11 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
 import { IsString, Length, IsUrl } from 'class-validator';
 import { MainEntity } from 'src/custom-entities/main.entity';
+import { User } from 'src/users/entities/user.entity';
+import { Wish } from 'src/wishes/entities/wish.entity';
 
 @Entity()
-export class Wishlists extends MainEntity {
+export class Wishlist extends MainEntity {
   @Column({
     type: 'varchar',
     length: 250,
@@ -26,7 +28,11 @@ export class Wishlists extends MainEntity {
   @IsUrl()
   image: string;
 
-  // @Column('simple-array', { nullable: true })
-  // @IsUrl({}, { each: true })
-  // items: string[];
+  @ManyToOne(() => User, (user) => user.wishlists)
+  owner: User;
+
+  @ManyToMany(() => Wish)
+  @JoinTable()
+  @IsUrl({}, { each: true })
+  items: Wish[];
 }

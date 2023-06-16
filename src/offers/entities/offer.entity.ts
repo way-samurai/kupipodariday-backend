@@ -1,17 +1,19 @@
 import { Entity, Column, ManyToOne } from 'typeorm';
 import { IsString, IsUrl, IsNumber } from 'class-validator';
 import { MainEntity } from 'src/custom-entities/main.entity';
+import { User } from 'src/users/entities/user.entity';
+import { Wish } from 'src/wishes/entities/wish.entity';
 
 @Entity()
-export class Offers extends MainEntity {
+export class Offer extends MainEntity {
   @Column()
   @IsNumber()
   userId: number;
 
-  // @ManyToOne(() => Users, (user) => user.offers)
-  // user: Users;
+  @ManyToOne(() => User, (user) => user.offers)
+  user: User;
 
-  @Column()
+  @ManyToOne(() => Wish, (wish) => wish.offers)
   @IsUrl()
   item: string;
 
