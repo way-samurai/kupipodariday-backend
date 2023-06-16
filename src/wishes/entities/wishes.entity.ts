@@ -36,7 +36,6 @@ export class Wishes extends MainEntity {
   @Column({
     type: 'varchar',
     length: 1024,
-    nullable: true,
   })
   @IsString()
   @Length(1, 1024)
