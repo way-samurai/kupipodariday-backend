@@ -6,6 +6,10 @@ import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { UsersModule } from './users/users.module';
+import { WishesModule } from './wishes/wishes.module';
+import { WishlistsModule } from './wishlists/wishlists.module';
+import { OffersModule } from './offers/offers.module';
 
 @Module({
   imports: [
@@ -31,6 +35,10 @@ import { APP_GUARD } from '@nestjs/core';
       ttl: 60,
       limit: 20,
     }),
+    UsersModule,
+    WishesModule,
+    WishlistsModule,
+    OffersModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
