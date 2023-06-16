@@ -10,6 +10,8 @@ import { UsersModule } from './users/users.module';
 import { WishesModule } from './wishes/wishes.module';
 import { WishlistsModule } from './wishlists/wishlists.module';
 import { OffersModule } from './offers/offers.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DatabaseService } from './config/typeorm.config';
 
 @Module({
   imports: [
@@ -17,6 +19,9 @@ import { OffersModule } from './offers/offers.module';
       isGlobal: true,
       load: [configuration],
       validationSchema: configSchema,
+    }),
+    TypeOrmModule.forRootAsync({
+      useClass: DatabaseService,
     }),
     WinstonModule.forRoot({
       levels: {
