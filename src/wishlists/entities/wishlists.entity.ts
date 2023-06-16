@@ -1,5 +1,5 @@
 import { Entity, Column } from 'typeorm';
-import { IsString, Length, IsEmail, IsUrl, IsDate } from 'class-validator';
+import { IsString, Length, IsUrl } from 'class-validator';
 import { MainEntity } from 'src/custom-entities/main.entity';
 
 @Entity()
@@ -26,7 +26,7 @@ export class Wishlists extends MainEntity {
   @IsUrl()
   image: string;
 
-  @Column('simple-array', { nullable: true })
-  @IsUrl({}, { each: true })
-  items: string[];
+  // @Column('simple-array', { nullable: true })
+  // @IsUrl({}, { each: true })
+  // items: string[];
 }
