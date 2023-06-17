@@ -53,7 +53,7 @@ export class UsersService {
     return user;
   }
 
-  findByQuery(query: string): Promise<User[]> {
+  async findByQuery(query: string): Promise<User[]> {
     return this.findAll({
       where: [{ username: query }, { email: query }],
     });
@@ -99,6 +99,7 @@ export class UsersService {
   getMyWishes(userId: number): Promise<Wish | Wish[]> {
     return this.findOne({
       where: { id: userId },
+      relationLoadStrategy: 'join',
       relations: { wishes: { owner: true } },
     }).then((user) => user.wishes);
   }
@@ -106,6 +107,7 @@ export class UsersService {
   getUserWishes(username: string): Promise<Wish | Wish[]> {
     return this.findOne({
       where: { username },
+      relationLoadStrategy: 'join',
       relations: { wishes: true },
     }).then((user) => user.wishes);
   }
