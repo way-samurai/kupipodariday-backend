@@ -13,6 +13,7 @@ import { OffersModule } from './offers/offers.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseService } from './config/typeorm.config';
 import { AuthModule } from './auth/auth.module';
+import { HashModule } from './hash/hash.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { AuthModule } from './auth/auth.module';
     WishesModule,
     WishlistsModule,
     OffersModule,
+    HashModule,
     AuthModule,
   ],
   controllers: [],

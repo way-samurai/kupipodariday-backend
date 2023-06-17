@@ -5,6 +5,10 @@ import { MainEntity } from 'src/custom-entities/main.entity';
 import { Offer } from 'src/offers/entities/offer.entity';
 import { Wish } from 'src/wishes/entities/wish.entity';
 import { Wishlist } from 'src/wishlists/entities/wishlist.entity';
+import {
+  ABOUT_DEFAULT_TEXT,
+  AVATAR_DEFAULT_LINK,
+} from 'src/utils/constants/users';
 
 @Entity()
 export class User extends MainEntity {
@@ -20,14 +24,14 @@ export class User extends MainEntity {
   @Column({
     type: 'varchar',
     length: 200,
-    default: 'Пока ничего не рассказал о себе',
+    default: ABOUT_DEFAULT_TEXT,
   })
   @IsString()
   @Length(2, 200)
   about: string;
 
   @Column({
-    default: 'https://i.pravatar.cc/300',
+    default: AVATAR_DEFAULT_LINK,
   })
   @IsUrl()
   avatar: string;

@@ -7,10 +7,12 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtConfig } from 'src/config/jwt-config.factory';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { HashModule } from 'src/hash/hash.module';
 
 @Module({
   imports: [
     UsersModule,
+    HashModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
