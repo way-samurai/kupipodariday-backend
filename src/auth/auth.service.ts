@@ -1,21 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { AuthDto } from './dto/auth.dto';
+//import { AuthDto } from './dto/auth.dto';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class AuthService {
-  findAll() {
-    return `This action returns all auth`;
-  }
+  //constructor() {}
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: AuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+  auth(user: User) {
+    return 'генерируем токен';
   }
 }
