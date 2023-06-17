@@ -46,6 +46,9 @@ import { DatabaseService } from './config/typeorm.config';
     OffersModule,
   ],
   controllers: [],
-  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
+  providers: [
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
+    DatabaseService,
+  ],
 })
 export class AppModule {}
