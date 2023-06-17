@@ -53,6 +53,6 @@ export class UsersController {
   @Post('find')
   findByUserNameOrEmail(@Body() searchUserDto: SearchUserDto): Promise<User[]> {
     const { query } = searchUserDto;
-    return this.usersService.findByQuery(query);
+    return this.usersService.findMany(query);
   }
 }

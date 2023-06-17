@@ -53,7 +53,7 @@ export class UsersService {
     return user;
   }
 
-  async findByQuery(query: string): Promise<User[]> {
+  async findMany(query: string): Promise<User[]> {
     return this.findAll({
       where: [{ username: query }, { email: query }],
     });
