@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtConfig } from 'src/config/jwt-config.factory';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HashModule } from 'src/hash/hash.module';
+import { LocalGuard } from './guards/local-auth.guard';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { HashModule } from 'src/hash/hash.module';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, LocalGuard],
   exports: [AuthService],
 })
 export class AuthModule {}

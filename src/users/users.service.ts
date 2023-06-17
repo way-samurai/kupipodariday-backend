@@ -4,6 +4,10 @@ import { HashService } from 'src/hash/hash.service';
 import { User } from './entities/user.entity';
 import { FindOneOptions, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
+import {
+  USER_ALREADY_EMAIL_EXIST,
+  USER_ALREADY_USERNAME_EXIST,
+} from 'src/utils/constants/users';
 
 @Injectable()
 export class UsersService {
@@ -22,14 +26,10 @@ export class UsersService {
       where: [{ username }],
     });
     if (userEmail) {
-      throw new ConflictException(
-        'Пользователь с таким email уже зарегистрирован',
-      );
+      throw new ConflictException(USER_ALREADY_EMAIL_EXIST);
     }
     if (userName) {
-      throw new ConflictException(
-        'Пользователь с таким именем пользовтеля уже зарегистрирован',
-      );
+      throw new ConflictException(USER_ALREADY_USERNAME_EXIST);
     }
 
     const hash = await this.hashService.generate(password);
