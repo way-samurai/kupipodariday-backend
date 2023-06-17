@@ -1,23 +1,34 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { OffersService } from './offers.service';
-import { CreateOfferDto } from './dto/create-offer.dto';
+import { Offer } from './entities/offer.entity';
+import { User } from 'src/users/entities/user.entity';
 
+@UseGuards(JwtGuard)
 @Controller('offers')
 export class OffersController {
   constructor(private readonly offersService: OffersService) {}
 
   @Post()
-  create(@Body() createOfferDto: CreateOfferDto) {
-    return this.offersService.create(createOfferDto);
+  create(@Body() CreateOfferDto, @Req() req: Request & { user: User }) {
+    return this.offersService.create(CreateOfferDto, req.user.id);
   }
 
   @Get()
-  findAll() {
+  getAll(): Promise<Offer[]> {
     return this.offersService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.offersService.findOne(+id);
+  getOne(@Param('id') id: string): Promise<Offer> {
+    return this.offersService.findById(+id);
   }
 }

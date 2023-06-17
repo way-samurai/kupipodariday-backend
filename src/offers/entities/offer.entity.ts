@@ -6,16 +6,12 @@ import { Wish } from 'src/wishes/entities/wish.entity';
 
 @Entity()
 export class Offer extends MainEntity {
-  @Column()
-  @IsNumber()
-  userId: number;
-
   @ManyToOne(() => User, (user) => user.offers)
   user: User;
 
   @ManyToOne(() => Wish, (wish) => wish.offers)
   @IsUrl()
-  item: string;
+  item: Wish;
 
   @Column({
     type: 'decimal',
