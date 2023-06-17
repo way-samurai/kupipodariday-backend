@@ -46,10 +46,4 @@ export class UsersService {
 
     return user;
   }
-
-  async findByUsername(username: FindOneOptions<User>) {
-    const user = await this.usersRepository.findOne(username);
-
-    return user;
-  }
 }
