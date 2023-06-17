@@ -7,11 +7,12 @@ import * as winston from 'winston';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { UsersModule } from './users/users.module';
-import { WishesModule } from './wishes/wishes.module';
 import { WishlistsModule } from './wishlists/wishlists.module';
+import { WishesModule } from './wishes/wishes.module';
 import { OffersModule } from './offers/offers.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseService } from './config/typeorm.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { DatabaseService } from './config/typeorm.config';
     WishesModule,
     WishlistsModule,
     OffersModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [
