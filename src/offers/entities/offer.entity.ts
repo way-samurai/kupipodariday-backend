@@ -1,5 +1,5 @@
 import { Entity, Column, ManyToOne } from 'typeorm';
-import { IsString, IsUrl, IsNumber } from 'class-validator';
+import { IsBoolean, IsUrl, IsNumber } from 'class-validator';
 import { MainEntity } from 'src/custom-entities/main.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Wish } from 'src/wishes/entities/wish.entity';
@@ -28,6 +28,6 @@ export class Offer extends MainEntity {
   @Column({
     default: false,
   })
-  @IsString()
+  @IsBoolean()
   hidden: boolean;
 }

@@ -40,6 +40,7 @@ export class User extends MainEntity {
 
   @Column()
   @Exclude()
+  @IsString()
   @IsNotEmpty()
   password: string;
 
