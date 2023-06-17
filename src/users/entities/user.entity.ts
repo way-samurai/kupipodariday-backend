@@ -1,5 +1,5 @@
 import { Entity, Column, OneToMany } from 'typeorm';
-import { IsString, Length, IsEmail, IsUrl } from 'class-validator';
+import { IsString, Length, IsEmail, IsUrl, IsNotEmpty } from 'class-validator';
 import { Exclude } from 'class-transformer';
 import { MainEntity } from 'src/custom-entities/main.entity';
 import { Offer } from 'src/offers/entities/offer.entity';
@@ -40,6 +40,7 @@ export class User extends MainEntity {
 
   @Column()
   @Exclude()
+  @IsNotEmpty()
   password: string;
 
   @OneToMany(() => Wish, (wish) => wish.owner)
