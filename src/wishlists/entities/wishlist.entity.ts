@@ -5,7 +5,7 @@ import { User } from 'src/users/entities/user.entity';
 import { Wish } from 'src/wishes/entities/wish.entity';
 
 @Entity()
-export class Wishlist extends MainEntity {
+export class WishList extends MainEntity {
   @Column({
     type: 'varchar',
     length: 250,

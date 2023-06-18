@@ -1,45 +1,58 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
-import { WishlistsService } from './wishlists.service';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { CreateWishlistDto } from './dto/create-wishlist.dto';
 import { UpdateWishlistDto } from './dto/update-wishlist.dto';
+import { WishlistService } from './wishlists.service';
+import { User } from 'src/users/entities/user.entity';
+import { WishList } from './entities/wishlist.entity';
 
-@Controller('wishlists')
+@UseGuards(JwtGuard)
+@Controller('wishlistlists')
 export class WishlistsController {
-  constructor(private readonly wishlistsService: WishlistsService) {}
-
-  @Post()
-  create(@Body() createWishlistDto: CreateWishlistDto) {
-    return this.wishlistsService.create(createWishlistDto);
-  }
+  constructor(private readonly wishListService: WishlistService) {}
 
   @Get()
-  findAll() {
-    return this.wishlistsService.findAll();
+  getWishlists(): Promise<WishList[]> {
+    return this.wishListService.getWishLists();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.wishlistsService.findOne(+id);
+  getById(@Param('id') id: string): Promise<WishList> {
+    return this.wishListService.getById(+id);
+  }
+
+  @Post()
+  create(
+    @Body() createWishlistDto: CreateWishlistDto,
+    @Req() req: Request & { user: User },
+  ): Promise<WishList> {
+    return this.wishListService.create(createWishlistDto, req.user.id);
+  }
+
+  @Delete(':id')
+  remove(
+    @Param('id') id: string,
+    @Req() req: Request & { user: User },
+  ): Promise<WishList> {
+    return this.wishListService.delete(+id, req.user.id);
   }
 
   @Patch(':id')
   update(
     @Param('id') id: string,
     @Body() updateWishlistDto: UpdateWishlistDto,
-  ) {
-    return this.wishlistsService.update(+id, updateWishlistDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.wishlistsService.remove(+id);
+    @Req() req: Request & { user: User },
+  ): Promise<WishList> {
+    return this.wishListService.update(+id, updateWishlistDto, req.user.id);
   }
 }
