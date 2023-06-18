@@ -1,11 +1,12 @@
 export default () => ({
-  port: parseInt(process.env.PORT, 10) || 3000,
+  port: 3001,
   database: {
-    host: process.env.DATABASE_HOST,
-    port: parseInt(process.env.DATABASE_PORT, 10) || 5432,
+    host: 'localhost',
+    port: 5432,
     username: 'student',
     password: 'student',
     database: 'kupipodariday',
+    shema: 'kupipodariday',
   },
   secretKey: process.env.JWT_SECRET || 'secret-key',
 });

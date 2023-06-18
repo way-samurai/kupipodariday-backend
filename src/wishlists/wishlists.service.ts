@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, Repository, Not } from 'typeorm';
 import { CreateWishlistDto } from './dto/create-wishlist.dto';
 import { UpdateWishlistDto } from './dto/update-wishlist.dto';
 import { WishList } from './entities/wishlist.entity';
@@ -26,8 +26,11 @@ export class WishlistsService {
     return this.wishlistRepository.findOne(query);
   }
 
-  async getWishLists(): Promise<WishList[]> {
-    return this.findAll({ relations: ['items', 'owner'] });
+  async getWishLists(id: number): Promise<WishList[]> {
+    return this.findAll({
+      where: { owner: { id: Not(id) } },
+      relations: ['items', 'owner'],
+    });
   }
 
   async getById(id: number): Promise<WishList> {
@@ -67,6 +70,9 @@ export class WishlistsService {
       where: { id },
       relations: { owner: true },
     });
+    if (!wishList) {
+      throw new NotFoundException(WISHLIST_NOT_FOUND);
+    }
     if (wishList.owner.id !== userId) {
       throw new ForbiddenException(USER_NOT_OWNER);
     }

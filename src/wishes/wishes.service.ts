@@ -5,6 +5,7 @@ import {
   FindManyOptions,
   FindOneOptions,
   Repository,
+  In,
 } from 'typeorm';
 import { CreateWishDto } from './dto/create-wish.dto';
 import { UpdateWishDto } from './dto/update-wish.dto';
@@ -29,6 +30,12 @@ export class WishesService {
 
   findOne(query: FindOneOptions<Wish>): Promise<Wish> {
     return this.wishesRepository.findOne(query);
+  }
+
+  async findManyByIdArr(idArr: number[]): Promise<Wish[]> {
+    return this.wishesRepository.find({
+      where: { id: In(idArr) },
+    });
   }
 
   getLast(): Promise<Wish[]> {

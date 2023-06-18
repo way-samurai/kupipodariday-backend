@@ -1,5 +1,12 @@
 import { Entity, Column, OneToMany } from 'typeorm';
-import { IsString, Length, IsEmail, IsUrl, IsNotEmpty } from 'class-validator';
+import {
+  IsString,
+  Length,
+  IsEmail,
+  IsUrl,
+  IsNotEmpty,
+  IsOptional,
+} from 'class-validator';
 import { Exclude } from 'class-transformer';
 import { MainEntity } from 'src/custom-entities/main.entity';
 import { Offer } from 'src/offers/entities/offer.entity';
@@ -17,6 +24,7 @@ export class User extends MainEntity {
     unique: true,
     length: 30,
   })
+  @IsNotEmpty()
   @IsString()
   @Length(2, 30)
   username: string;
@@ -26,6 +34,7 @@ export class User extends MainEntity {
     length: 200,
     default: ABOUT_DEFAULT_TEXT,
   })
+  @IsOptional()
   @IsString()
   @Length(2, 200)
   about: string;
@@ -33,12 +42,14 @@ export class User extends MainEntity {
   @Column({
     default: AVATAR_DEFAULT_LINK,
   })
+  @IsOptional()
   @IsUrl()
   avatar: string;
 
   @Column({
     unique: true,
   })
+  @IsNotEmpty()
   @IsEmail()
   email: string;
 

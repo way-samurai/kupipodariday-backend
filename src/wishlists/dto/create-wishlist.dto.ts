@@ -5,12 +5,14 @@ import {
   IsString,
   IsUrl,
   Length,
-  Max,
+  MaxLength,
 } from 'class-validator';
 
 export class CreateWishlistDto {
   @IsString()
-  @Length(1, 250)
+  @Length(1, 250, {
+    message: 'Название должно быть от 2 до 250 символов',
+  })
   name: string;
 
   @IsString()
@@ -21,8 +23,10 @@ export class CreateWishlistDto {
   @IsNumber({}, { each: true })
   itemsId: number[];
 
-  @IsOptional()
+  @MaxLength(1500, {
+    message: 'Максимальная длина не должна превышать 1500 символов',
+  })
   @IsString()
-  @Max(1500)
+  @IsOptional()
   description?: string;
 }
