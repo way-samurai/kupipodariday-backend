@@ -9,5 +9,5 @@ export const configSchema = Joi.object({
     password: Joi.string().required(),
     database: Joi.string().required(),
   }),
-  secretKey: Joi.string().required(),
+  secretKey: Joi.string(),
 });

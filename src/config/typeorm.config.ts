@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { Offer } from 'src/offers/entities/offer.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Wish } from 'src/wishes/entities/wish.entity';
-import { Wishlist } from 'src/wishlists/entities/wishlist.entity';
+import { WishList } from 'src/wishlists/entities/wishlist.entity';
 
 @Injectable()
 export class DatabaseService implements TypeOrmOptionsFactory {
@@ -17,7 +17,7 @@ export class DatabaseService implements TypeOrmOptionsFactory {
       username: this.configService.get<string>('database.username'),
       password: this.configService.get<string>('database.password'),
       database: this.configService.get<string>('database.database'),
-      entities: [Offer, User, Wish, Wishlist],
+      entities: [Offer, User, Wish, WishList],
       synchronize: true,
     };
   }

@@ -12,7 +12,7 @@ import { USER_NOT_OWNER } from 'src/utils/constants/wishes';
 import { WISHLIST_NOT_FOUND } from 'src/utils/constants/wishlists';
 
 @Injectable()
-export class WishlistService {
+export class WishlistsService {
   constructor(
     @InjectRepository(WishList)
     private wishlistRepository: Repository<WishList>,

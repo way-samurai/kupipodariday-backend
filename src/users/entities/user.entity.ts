@@ -4,7 +4,7 @@ import { Exclude } from 'class-transformer';
 import { MainEntity } from 'src/custom-entities/main.entity';
 import { Offer } from 'src/offers/entities/offer.entity';
 import { Wish } from 'src/wishes/entities/wish.entity';
-import { Wishlist } from 'src/wishlists/entities/wishlist.entity';
+import { WishList } from 'src/wishlists/entities/wishlist.entity';
 import {
   ABOUT_DEFAULT_TEXT,
   AVATAR_DEFAULT_LINK,
@@ -54,6 +54,6 @@ export class User extends MainEntity {
   @OneToMany(() => Offer, (offer) => offer.user)
   offers: Offer[];
 
-  @OneToMany(() => Wishlist, (wishlist) => wishlist.owner)
-  wishlists: Wishlist[];
+  @OneToMany(() => WishList, (wishlist) => wishlist.owner)
+  wishlists: WishList[];
 }

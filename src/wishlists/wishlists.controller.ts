@@ -12,14 +12,14 @@ import {
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { CreateWishlistDto } from './dto/create-wishlist.dto';
 import { UpdateWishlistDto } from './dto/update-wishlist.dto';
-import { WishlistService } from './wishlists.service';
+import { WishlistsService } from './wishlists.service';
 import { User } from 'src/users/entities/user.entity';
 import { WishList } from './entities/wishlist.entity';
 
 @UseGuards(JwtGuard)
 @Controller('wishlistlists')
 export class WishlistsController {
-  constructor(private readonly wishListService: WishlistService) {}
+  constructor(private readonly wishListService: WishlistsService) {}
 
   @Get()
   getWishlists(): Promise<WishList[]> {
