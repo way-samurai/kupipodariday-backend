@@ -25,7 +25,7 @@
 Для того, чтобы развернуть проект на своей машине, вам необходимо:
 
 1. Убедиться, что на вашем компьютере установлены Node.js и PostgreSQL.
-2. Скачайте исходный код с помощью `git clone https://github.com/t0pall/kupipodariday-backend.git`.
+2. Скачайте исходный код с помощью `git clone https://github.com/way-samurai/kupipodariday-backend.git`.
 3. Установите зависимости, запустив команду `npm install`.
 4. Создайте базу данных PostgreSQL с названием `kupipodariday`.
 6. Запустите сервер, выполнив команду `npm run start`.
